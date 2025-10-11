@@ -48,9 +48,9 @@ export const Home = () => {
     }, [dispatch]);
 
     return (
-        <View>
+        <ScrollView>
             <Carousel />
-            <View style={styles.container}>
+            <View style={styles.containerTitle}>
                 <Text style={styles.text}>Categorias</Text>
                 <View style={styles.containerIcon}>
                     <Image source={chevron} />
@@ -65,37 +65,51 @@ export const Home = () => {
                             source={images[index % images.length]}
                             style={styles.categoryImage}
                         />
-                        <Text style={styles.categoryText}>{c}</Text>
+                        <Text style={styles.containerTitle}>{c}</Text>
                     </View>
                 ))}
             </ScrollView>
-             <View style={styles.container}>
-                <Text style={styles.text}>Grãos</Text>
-                <View style={styles.containerIcon}>
-                    <Image source={chevron} />
-                </View>
+            <View>
+                {categories.map((c) => (
+                    <View>
+                        <View style={styles.containerTitle}>
+                            <Text style={styles.text}>{c}</Text>
+                            <View style={styles.containerIcon}>
+                                <Image source={chevron} />
+                            </View>
+                        </View>
+                        <ScrollView
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={styles.containerProducts}
+                        >
+                            {products
+                                .filter(p => p.category === c)
+                                .map((p, index) => (
+                                    <View key={index} style={{ marginRight: 10 }}>
+                                        <Image
+                                            source={{ uri: `${API_URL}/imgs/${p.photo}` }}
+                                            style={{ width: 100, height: 100, borderRadius: 8 }}
+                                        />
+                                        <Text>{p.name}</Text>
+                                        <Text>{p.price}</Text>
+                                    </View>
+                                ))}
+                        </ScrollView>
+
+                    </View>
+                ))}
             </View>
-            <ScrollView horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.categories}>
-                {products && products.map((p, index) => (
-                    <View key={index}>
-                        <Image source={{ uri: `${API_URL}/imgs/${p.photo}`}} style={{ width: 100, height: 100 }} />
-                        <Text>{p.name}</Text>
-                        <Text>{p.price}</Text>
-                    </View>
-                ))}
-            </ScrollView>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 30,
+    containerTitle: {
         flexDirection: 'row',
-        gap: 5,
-        alignItems: "center"
+    },
+    containerProducts: {
+        flexDirection: 'row',
     },
     text: {
         fontSize: 16,
@@ -112,10 +126,12 @@ const styles = StyleSheet.create({
     categories: {
         paddingHorizontal: 10,
         gap: 10,
+        height: 178
     },
     categoryItem: {
         alignItems: "center",
         marginRight: 15,
+        height: 146
     },
     categoryImage: {
         width: 80,

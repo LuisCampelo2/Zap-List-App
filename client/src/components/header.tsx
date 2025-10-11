@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         gap:5,
+        marginTop:20,
     },
     logo: {
         width:90,
