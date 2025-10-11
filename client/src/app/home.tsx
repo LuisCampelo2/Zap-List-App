@@ -98,18 +98,15 @@ export const Home = () => {
 }
 const styles = StyleSheet.create({
     container: {
-        height: 258,
         gap: 20,
     },
     containerTitle: {
-        marginBottom:30,
-        marginTop:45,
+        marginBottom: 30,
+        marginTop: 45,
         flexDirection: 'row',
     },
     containerProducts: {
-        height:258,
         flexDirection: 'row',
-        gap:30
     },
     text: {
         fontSize: 16,
