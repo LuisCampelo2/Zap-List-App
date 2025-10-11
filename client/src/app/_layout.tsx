@@ -3,6 +3,8 @@ import { Header } from "../components/header";
 import { Provider } from "react-redux";
 import { Slot } from "expo-router";
 import { store } from "../store/store";
+import { NavBar } from "../components/navBar";
+
 
 export default function Layout() {
     return (
@@ -11,6 +13,7 @@ export default function Layout() {
                 <Header />
                 <Slot />
             </View>
+             <NavBar/>
         </Provider>
     );
 }

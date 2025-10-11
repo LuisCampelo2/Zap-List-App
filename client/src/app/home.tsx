@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../slices/productsSlice";
 import { ProductCard } from "../components/productCard";
-import { API_URL } from "@env";
 
 const images = [
     require('../../assets/images/categories/graos.png'),
