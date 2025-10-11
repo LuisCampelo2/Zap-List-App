@@ -6,6 +6,7 @@ import type { RootState, AppDispatch } from "../store/store";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../slices/productsSlice";
+import { ProductCard } from "../components/productCard";
 import { API_URL } from "@env";
 
 const images = [
@@ -65,51 +66,50 @@ export const Home = () => {
                             source={images[index % images.length]}
                             style={styles.categoryImage}
                         />
-                        <Text style={styles.containerTitle}>{c}</Text>
+                        <Text>{c}</Text>
                     </View>
                 ))}
             </ScrollView>
-            <View>
-                {categories.map((c) => (
-                    <View>
-                        <View style={styles.containerTitle}>
-                            <Text style={styles.text}>{c}</Text>
-                            <View style={styles.containerIcon}>
-                                <Image source={chevron} />
-                            </View>
+            {categories.map((c) => (
+                <View style={styles.container}>
+                    <View style={styles.containerTitle}>
+                        <Text style={styles.text}>{c}</Text>
+                        <View style={styles.containerIcon}>
+                            <Image source={chevron} />
                         </View>
-                        <ScrollView
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={styles.containerProducts}
-                        >
-                            {products
-                                .filter(p => p.category === c)
-                                .map((p, index) => (
-                                    <View key={index} style={{ marginRight: 10 }}>
-                                        <Image
-                                            source={{ uri: `${API_URL}/imgs/${p.photo}` }}
-                                            style={{ width: 100, height: 100, borderRadius: 8 }}
-                                        />
-                                        <Text>{p.name}</Text>
-                                        <Text>{p.price}</Text>
-                                    </View>
-                                ))}
-                        </ScrollView>
-
                     </View>
-                ))}
-            </View>
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={styles.containerProducts}
+                    >
+                        {products
+                            .filter(p => p.category === c)
+                            .map((p, index) => (
+                                <View key={index} style={styles.containerProducts}>
+                                    <ProductCard product={p} />
+                                </View>
+                            ))}
+                    </ScrollView>
+                </View>
+            ))}
         </ScrollView>
     )
 }
-
 const styles = StyleSheet.create({
+    container: {
+        height: 258,
+        gap: 20,
+    },
     containerTitle: {
+        marginBottom:30,
+        marginTop:45,
         flexDirection: 'row',
     },
     containerProducts: {
+        height:258,
         flexDirection: 'row',
+        gap:30
     },
     text: {
         fontSize: 16,
@@ -123,26 +123,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 5,
     },
-    categories: {
-        paddingHorizontal: 10,
-        gap: 10,
-        height: 178
-    },
+    categories: {},
     categoryItem: {
         alignItems: "center",
         marginRight: 15,
-        height: 146
     },
     categoryImage: {
         width: 80,
-        height: 80,
         borderRadius: 10,
-        marginBottom: 5,
     },
-    categoryText: {
-        fontSize: 12,
-        textAlign: "center",
-        color: "#333",
-        width: 90,
-    },
+    categoryText: {},
 });
