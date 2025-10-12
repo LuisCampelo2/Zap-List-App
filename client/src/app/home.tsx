@@ -71,7 +71,7 @@ export const Home = () => {
             </ScrollView>
             {categories.map((c) => (
                 <View style={styles.container}>
-                    <View style={styles.containerTitle}>
+                    <View style={styles.containerTitleCategory}>
                         <Text style={styles.text}>{c}</Text>
                         <View style={styles.containerIcon}>
                             <Image source={chevron} />
@@ -101,6 +101,10 @@ const styles = StyleSheet.create({
     },
     containerTitle: {
         marginBottom: 30,
+        marginTop: 45,
+        flexDirection: 'row',
+    },
+    containerTitleCategory: {
         marginTop: 45,
         flexDirection: 'row',
     },
