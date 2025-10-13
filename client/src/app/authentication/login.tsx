@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "../../../assets/images/logo.png";
-import { useDispatch} from "react-redux";
-import { type AppDispatch, type RootState } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { type AppDispatch } from "../../store/store";
 import { login } from '../../slices/userSlice'
 import { router } from "expo-router";
 

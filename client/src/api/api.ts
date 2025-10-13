@@ -15,4 +15,8 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export default api;
+const publicApi = axios.create({
+  baseURL: API_URL,
+});
+
+export { api, publicApi };

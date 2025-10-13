@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { type Product } from "../types/product";
-import api from "../api/api";
+import {api,publicApi} from "../api/api";
 
 
 export const fetchProducts = createAsyncThunk(
@@ -15,7 +15,7 @@ export const fetchProducts = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const res = await api.get(
+      const res = await publicApi.get(
         `/api/products`,
         {
           params: {

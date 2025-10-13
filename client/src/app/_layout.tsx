@@ -1,21 +1,33 @@
-import { View, StyleSheet } from "react-native";
-import { Header } from "../components/header";
 import { Provider } from "react-redux";
-import { Slot, usePathname } from "expo-router";
 import { store } from "../store/store";
+import { Stack } from "expo-router";
 import { NavBar } from "../components/navBar";
-
+import { Header } from "../components/header";
+import { StyleSheet, View } from "react-native";
 
 export default function Layout() {
-    const pathname = usePathname();
-    const hideHeader = ["/authentication/login"];
     return (
         <Provider store={store}>
             <View style={styles.container}>
-                {!hideHeader.includes(pathname) && <Header />}
-                <Slot />
+                    <Header />
+                <View style={styles.content}>
+                    <Stack
+                        screenOptions={{
+                            headerShown: false,
+                            contentStyle: { backgroundColor: 'transparent' },
+                        }}
+                    >
+                        <Stack.Screen name="index" options={{ title: "Index" }} />
+                        <Stack.Screen name="home" options={{ title: "Home" }} />
+                        <Stack.Screen name="user/profile" options={{ title: "Profile" }} />
+                        <Stack.Screen
+                            name="authentication/login"
+                            options={{ title: "Login" }}
+                        />
+                    </Stack>
+                </View>
+                    <NavBar />
             </View>
-            <NavBar />
         </Provider>
     );
 }
@@ -23,8 +35,10 @@ export default function Layout() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 15,
-        backgroundColor: "#f1f1cdff",
-        padding: 20,
+        backgroundColor:'#f8ecc5ff'
+    },
+    content: {
+        flex: 1,
+        padding:20,
     },
 });
