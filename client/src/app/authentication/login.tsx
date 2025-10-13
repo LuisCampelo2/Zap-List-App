@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../../assets/images/logo.png";
+import { useDispatch} from "react-redux";
+import { type AppDispatch, type RootState } from "../../store/store";
+import { login } from '../../slices/userSlice'
+import { router } from "expo-router";
 
 import {
   View,
@@ -11,25 +15,48 @@ import {
 } from "react-native";
 
 
-export default function login() {
+export default function loginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleSubmit = () => {
-    console.log('Email:', email);
-    console.log('Password:', password);
+
+  const handleSubmit = async () => {
+    const res = await dispatch(login({ email, password }));
+
+    if (login.fulfilled.match(res)) {
+      router.push("/");
+    }
   };
+
 
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: '800', fontSize: 30 }}>Seja bem-vindo à Zap List</Text>
       <Image source={logo} style={styles.logo} />
-      <Text style={{ fontWeight: '800', fontSize: 23 }}>Entrar</Text>
-      <TextInput style={styles.input} placeholder="email:" placeholderTextColor="#999" />
-      <TextInput style={styles.input} placeholder="senha:" placeholderTextColor="#999" />
-      <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
-        <Text style={{ color: 'white' }}>Entrar</Text>
-      </TouchableOpacity>
+      <TextInput
+        style={styles.input}
+        placeholder="email:"
+        placeholderTextColor="#999"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail} />
+      <TextInput
+        style={styles.input}
+        placeholder="senha:"
+        placeholderTextColor="#999"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword} />
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.btn}>
+          <Text style={{ color: 'white' }}>Não tem conta? Clique aqui</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+          <Text style={{ color: 'white' }}>Entrar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 };
@@ -56,9 +83,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     color: 'white',
     padding: 16,
-    width: 327,
     alignItems: 'center',
     borderRadius: 8,
+    marginTop: 20
+  },
+  footer: {
+    flexDirection: 'row',
+    width: 327,
+    justifyContent: 'space-between'
   }
 })
 
