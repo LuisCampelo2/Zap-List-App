@@ -1,10 +1,10 @@
 import { View, Text, TouchableOpacity } from "react-native"
 import { useSelector, useDispatch } from "react-redux";
-import { type AppDispatch, RootState } from "../../store/store";
-import { logout } from "../../slices/userSlice";
+import { type AppDispatch, RootState } from "../../../store/store";
+import { logout } from "../../../slices/userSlice";
 import { router } from "expo-router";
 
-export default function Profile() {
+export default function Index() {
     const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((state: RootState) => state.user.user);
 

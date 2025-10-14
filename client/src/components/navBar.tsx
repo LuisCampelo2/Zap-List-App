@@ -16,7 +16,7 @@ export const NavBar = () => {
             </Link>
             <EvilIcons name="cart" size={40} color="black" />
             <FontAwesome5 name="bell" size={30} color="black" />
-            <Link href="/authentication/login" asChild>
+            <Link href="/user" asChild>
                 <TouchableOpacity>
                     <Ionicons name="person-sharp" size={30} color="black" />
                 </TouchableOpacity>

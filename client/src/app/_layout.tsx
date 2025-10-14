@@ -4,12 +4,15 @@ import { Stack } from "expo-router";
 import { NavBar } from "../components/navBar";
 import { Header } from "../components/header";
 import { StyleSheet, View } from "react-native";
+import { usePathname } from "expo-router";
 
 export default function Layout() {
+     const pathname = usePathname();
+     const hideNavBarRoutes = ["/authentication/login"];
     return (
         <Provider store={store}>
             <View style={styles.container}>
-                    <Header />
+                   {!hideNavBarRoutes.includes(pathname) && <Header />}
                 <View style={styles.content}>
                     <Stack
                         screenOptions={{
@@ -18,8 +21,7 @@ export default function Layout() {
                         }}
                     >
                         <Stack.Screen name="index" options={{ title: "Index" }} />
-                        <Stack.Screen name="home" options={{ title: "Home" }} />
-                        <Stack.Screen name="user/profile" options={{ title: "Profile" }} />
+                        <Stack.Screen name="(private)" />
                         <Stack.Screen
                             name="authentication/login"
                             options={{ title: "Login" }}
@@ -35,7 +37,7 @@ export default function Layout() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'#f8ecc5ff'
+        backgroundColor:'#f8ecc5ff',
     },
     content: {
         flex: 1,
