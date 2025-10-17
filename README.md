@@ -121,7 +121,7 @@ No mobile, aponte as requisições para o endereço correto do backend. Se estiv
 Se estiver no celular físico e o backend rodando na sua máquina, use o IP local da sua máquina `http://192.168.x.y:4000`.
 
 
-## 12. Recursos úteis
+## 5. Recursos úteis
 
 * React Native: [https://reactnative.dev/](https://reactnative.dev/)
 * Expo: [https://docs.expo.dev/](https://docs.expo.dev/)
